@@ -19,7 +19,7 @@ interface FetchGames {
   results: Game[];
 }
 
-const useGames = () => {
+const useGames = (selectedGenre: Genre | null) => {
   const [games, setGames] = useState<Game[]>([]);
   const [error, setError] = useState<string | null>("");
   const [isLoading, setLoading] = useState(false);
@@ -31,6 +31,7 @@ const useGames = () => {
       try {
         const res = await apiClient.get<FetchGames>("/games", {
           signal: controller.signal,
+        
         });
         setGames(res.data.results);
         setLoading(false);
