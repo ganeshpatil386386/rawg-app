@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import apiClient from "../services/api-client";
 import { CanceledError } from "axios";
+import { Genre } from "./useGenres";
 
 export interface Platform {
   id: number;
@@ -31,7 +32,6 @@ const useGames = (selectedGenre: Genre | null) => {
       try {
         const res = await apiClient.get<FetchGames>("/games", {
           signal: controller.signal,
-        
         });
         setGames(res.data.results);
         setLoading(false);
